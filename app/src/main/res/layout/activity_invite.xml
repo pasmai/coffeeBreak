@@ -6,23 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".InviteActivity">
 
-    <EditText
-        android:id="@+id/edit_breaktime"
+    <TimePicker
+        android:id="@+id/timepicker_breaktime"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="686dp"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="Break start in X minutes"
-        android:inputType="time"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:timePickerMode="spinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/edit_videourl"
@@ -37,7 +34,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_breaktime" />
+        app:layout_constraintTop_toBottomOf="@id/timepicker_breaktime" />
 
     <Button
         android:id="@+id/button_sendinvite"
