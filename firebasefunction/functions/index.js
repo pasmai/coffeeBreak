@@ -4,7 +4,7 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 
-exports.pushNotification = functions.database.ref('/YourNode/{pushId}').onWrite((change, context) => {
+exports.pushNotification = functions.database.ref('/invites/{pushId}').onWrite((change, context) => {
     console.log('Push notification event triggered');
 
     //  Get the current value of what was written to the Realtime Database.

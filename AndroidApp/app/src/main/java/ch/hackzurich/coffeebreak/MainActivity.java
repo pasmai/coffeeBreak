@@ -42,10 +42,7 @@ public class MainActivity extends AppCompatActivity {
                     AuthUI.getInstance().createSignInIntentBuilder().setIsSmartLockEnabled(!BuildConfig.DEBUG /* credentials */, true /* hints */)
                             .build(),
                     RC_SIGN_IN);
-
             FirebaseMessaging.getInstance().subscribeToTopic("all");
-
-
         }else{
             startActivity(new Intent(MainActivity.this, InviteActivity.class));
         }
