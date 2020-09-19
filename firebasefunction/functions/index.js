@@ -10,17 +10,17 @@ exports.pushNotification = functions.database.ref('/invites/{urlString}/{timesta
     console.log(context.params.timestampString);
     // Create a notification
     const payload = {
-       "data": {
+       data: {
             timestamp: context.params.timestampString,
             url: context.params.urlString
         },
         notification: {
-            title: "valueObject.title",
-            body: "valueObject.message",
+            title: "CoffeeBreak",
+            body: "You have been invited to a coffee break",
             sound: "default"
         }
     };
-
+    console.log(payload);
     // Create an options object that contains the time to live for the notification and the priority
     const options = {
         priority: "high",
