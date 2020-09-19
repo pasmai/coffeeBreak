@@ -14,8 +14,8 @@ public final class Helper {
         month = calendar.get(Calendar.MONTH);
         date = calendar.get(Calendar.DATE);
 
-        hour = datePicker.getCurrentHour();
-        minute =  datePicker.getCurrentMinute();
+        hour = datePicker.getHour();
+        minute =  datePicker.getMinute();
 
         calendar.set(year, month, date, hour, minute);
 

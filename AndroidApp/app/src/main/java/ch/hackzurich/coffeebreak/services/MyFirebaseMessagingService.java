@@ -45,7 +45,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
-        String notificationTitle = null, notificationBody = null;
+        Log.d(TAG, "Message received: " +remoteMessage.toString() +" data="+remoteMessage.getData());
 
         // Check if message contains a notification payload
         if (remoteMessage.getNotification() != null) {
@@ -69,6 +69,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Map<String, String> messageData = remoteMessage.getData();
         String url = messageData.get("url");
         String l = messageData.get("timestamp");
+
         if (l == null) {
             Log.d(TAG, "Received timestamp null");
             return;
@@ -79,7 +80,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         }
 
         Long timestamp = Long.parseLong(l);
-        Log.d(TAG, "Message parsed: timestampe=" +timestamp+" url="+url+" senderId="+remoteMessage.getSenderId() +" data="+remoteMessage.getData());
+        Log.d(TAG, "Message parsed: timestamp=" +timestamp+" url="+url+" senderId="+remoteMessage.getSenderId() +" data="+remoteMessage.getData());
 
 
 

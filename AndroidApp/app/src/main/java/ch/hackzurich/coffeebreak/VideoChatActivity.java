@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.jitsi.meet.sdk.JitsiMeet;
 import org.jitsi.meet.sdk.JitsiMeetActivity;
@@ -21,13 +22,15 @@ import java.net.URL;
             setContentView(R.layout.activity_video_chat);
 
             // Initialize default options for Jitsi Meet conferences.
-            String serverString = getIntent().getStringExtra(Config.video_url_identifier);
+            String meetingId = getIntent().getStringExtra(Config.video_url_identifier);
             URL serverURL;
             try {
-                serverURL = new URL(serverString);
+                serverURL = new URL("https://meet.jit.si/" + meetingId);
             } catch (MalformedURLException e) {
                 e.printStackTrace();
-                throw new RuntimeException("Invalid server URL!");
+                Toast.makeText(this, "Could not open meeting URL", Toast.LENGTH_SHORT).show();
+                finish();
+                return;
             }
             JitsiMeetConferenceOptions defaultOptions
                     = new JitsiMeetConferenceOptions.Builder()
