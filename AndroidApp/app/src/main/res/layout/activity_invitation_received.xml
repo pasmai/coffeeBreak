@@ -8,7 +8,7 @@
 
 
     <TextView
-        android:id="@+id/text_invitation"
+        android:id="@+id/text_invitation_recv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="686dp"
@@ -26,7 +26,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/text_time_until_start"
+        android:id="@+id/text_untilbreak_recv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
@@ -36,8 +36,24 @@
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_invitation"
+        app:layout_constraintTop_toBottomOf="@id/text_invitation_recv"
         />
+
+    <TextView
+        android:id="@+id/text_timer_until_break_recv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:text="00:00"
+        android:textSize="36sp"
+        app:layout_constraintTop_toBottomOf="@id/text_untilbreak_recv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/button_accept_invite"

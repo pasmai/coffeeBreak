@@ -64,9 +64,8 @@ public class InviteActivity extends AppCompatActivity {
                 i.putExtra(Config.video_url_identifier, url);
                 i.putExtra(Config.break_time_identifier, startTime.getTime());
 
-                // TODO send the invite link to the other participants via notification
-                sendNotificationToServer(url, startTime);
-
+                // send message to server which will then send notifications to all users
+                MyFirebaseMessagingService.sendNotificationToServer(url, startTime);
 
                 startActivity(i);
             }
@@ -110,15 +109,4 @@ public class InviteActivity extends AppCompatActivity {
         }
     }
 
-    private void sendNotificationToServer(String url, Date date){
-        FirebaseMessaging fm = FirebaseMessaging.getInstance();
-
-        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-        fm.send(new RemoteMessage.Builder(SENDER_ID + email)
-                .setMessageId(Integer.toString(MyFirebaseMessagingService.MSG_ID.incrementAndGet()))
-                .addData("url", url)
-                .addData("date", date.toString())
-                .addData("target_topic", "all")
-                .build());
-    }
 }
