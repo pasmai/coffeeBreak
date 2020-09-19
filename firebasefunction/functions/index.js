@@ -4,20 +4,17 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 
-exports.pushNotification = functions.database.ref('/invites/{pushId}').onWrite((change, context) => {
+exports.pushNotification = functions.database.ref('/invites/{url}').onWrite(event => {
     console.log('Push notification event triggered');
-
-    //  Get the current value of what was written to the Realtime Database.
-    const valueObject = change.after.val(); 
 
     // Create a notification
     const payload = {
         notification: {
-            title: valueObject.title,
-            body: valueObject.message,
+            title: "valueObject.title",
+            body: "valueObject.message",
             sound: "default",
             timestamp: 1600547519,
-            url: "http://www.google.com"
+            url: event.params.url,
         }
     };
 

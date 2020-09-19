@@ -71,9 +71,8 @@ public class InviteActivity extends AppCompatActivity {
 
                 // Write a message to the database
                 DatabaseReference database = FirebaseDatabase.getInstance().getReference();
-                database.child("invites").child("url").child("url").setValue(url);
-                database.child("invites").child("url").child("timestamp").setValue(startTime.getTime());
-                database.child("invites").child("url").child("target_topic").setValue("all");
+                database.child("invites").child(url).child("timestamp").setValue(startTime.getTime());
+                database.child("invites").child(url).child("target_topic").setValue("all");
 
                 startActivity(i);
             }
