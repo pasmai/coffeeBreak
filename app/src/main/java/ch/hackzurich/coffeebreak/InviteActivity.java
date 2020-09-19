@@ -1,9 +1,9 @@
 package ch.hackzurich.coffeebreak;
 
 import androidx.appcompat.app.AppCompatActivity;
+import ch.hackzurich.coffeebreak.services.MyFirebaseMessagingService;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,9 +13,14 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import com.google.firebase.auth.FirebaseAuth;
+
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.RemoteMessage;
+
 import java.util.Date;
+
+import static com.google.firebase.messaging.Constants.MessagePayloadKeys.SENDER_ID;
 
 public class InviteActivity extends AppCompatActivity {
     TextView urlField;
@@ -54,6 +59,9 @@ public class InviteActivity extends AppCompatActivity {
                 i.putExtra(Config.break_time_identifier, startTime.getTime());
 
                 // TODO send the invite link to the other participants via notification
+                sendNotificationToServer(url, startTime);
+
+
                 startActivity(i);
             }
         });
@@ -84,5 +92,17 @@ public class InviteActivity extends AppCompatActivity {
         } else {
             inviteButton.setEnabled(false);
         }
+    }
+
+    private void sendNotificationToServer(String url, Date date){
+        FirebaseMessaging fm = FirebaseMessaging.getInstance();
+
+        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        fm.send(new RemoteMessage.Builder(SENDER_ID + email)
+                .setMessageId(Integer.toString(MyFirebaseMessagingService.MSG_ID.incrementAndGet()))
+                .addData("url", url)
+                .addData("date", date.toString())
+                .addData("target_topic", "all")
+                .build());
     }
 }

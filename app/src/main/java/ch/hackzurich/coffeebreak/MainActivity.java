@@ -12,6 +12,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.Arrays;
 
@@ -48,8 +49,12 @@ public class MainActivity extends AppCompatActivity {
                             //new AuthUI.IdpConfig.PhoneBuilder().build()),
                             new AuthUI.IdpConfig.EmailBuilder().build())).build(),
                     RC_SIGN_IN);
+
+            FirebaseMessaging.getInstance().subscribeToTopic("all");
+
+
         }else{
-            startActivity(new Intent(MainActivity.this, VideoChatActivity.class));
+            startActivity(new Intent(MainActivity.this, InviteActivity.class));
         }
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -60,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
             // Successfully signed in
             if (resultCode == RESULT_OK) {
-                startActivity(new Intent(MainActivity.this, VideoChatActivity.class));
+                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
                 finish();
             } else {
             }
