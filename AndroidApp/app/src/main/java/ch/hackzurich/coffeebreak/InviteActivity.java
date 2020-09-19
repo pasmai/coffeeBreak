@@ -23,6 +23,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.RemoteMessage;
 
 import java.util.Date;
+import java.util.Random;
 
 import static com.google.firebase.messaging.Constants.MessagePayloadKeys.SENDER_ID;
 
@@ -39,8 +40,7 @@ public class InviteActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_invite);
-
-        urlField = findViewById(R.id.edit_videourl);
+        
         startTimeField = findViewById(R.id.timepicker_breaktime);
         inviteButton = findViewById(R.id.button_sendinvite);
         settingsButton = findViewById(R.id.button_settings);
@@ -61,7 +61,18 @@ public class InviteActivity extends AppCompatActivity {
                     return;
                 }
 
-                String url = urlField.getText().toString();
+                int leftLimit = 97; // letter 'a'
+                int rightLimit = 122; // letter 'z'
+                int targetStringLength = 10;
+                Random random = new Random();
+                StringBuilder buffer = new StringBuilder(targetStringLength);
+                for (int j = 0; j < targetStringLength; j++) {
+                    int randomLimitedInt = leftLimit + (int)
+                            (random.nextFloat() * (rightLimit - leftLimit + 1));
+                    buffer.append((char) randomLimitedInt);
+                }
+
+                String url = buffer.toString();
 
                 i.putExtra(Config.video_url_identifier, url);
                 i.putExtra(Config.break_time_identifier, startTime.getTime());
@@ -86,33 +97,5 @@ public class InviteActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
-
-
-
-        urlField.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                checkRequiredFields();
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-            }
-        });
-
     }
-
-    private void checkRequiredFields(){
-        if (!urlField.getText().toString().trim().isEmpty()){
-            inviteButton.setEnabled(true);
-        } else {
-            inviteButton.setEnabled(false);
-        }
-    }
-
 }
