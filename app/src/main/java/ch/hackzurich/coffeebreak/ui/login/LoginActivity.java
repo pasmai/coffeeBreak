@@ -5,6 +5,7 @@ import android.app.Activity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -22,6 +23,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import ch.hackzurich.coffeebreak.InviteActivity;
 import ch.hackzurich.coffeebreak.R;
 
 public class LoginActivity extends AppCompatActivity {
@@ -113,6 +115,9 @@ public class LoginActivity extends AppCompatActivity {
                 loadingProgressBar.setVisibility(View.VISIBLE);
                 loginViewModel.login(usernameEditText.getText().toString(),
                         passwordEditText.getText().toString());
+
+                Intent i = new Intent(LoginActivity.this, InviteActivity.class);
+                startActivity(i);
             }
         });
     }
