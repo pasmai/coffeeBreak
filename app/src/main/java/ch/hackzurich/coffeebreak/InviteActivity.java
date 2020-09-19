@@ -1,6 +1,12 @@
 package ch.hackzurich.coffeebreak;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -12,6 +18,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+import android.util.Log;
+
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,6 +29,9 @@ public class InviteActivity extends AppCompatActivity {
     TextView urlField;
     TimePicker startTimeField;
     Button inviteButton;
+    Button settingsButton;
+
+    private static final String TAG = "InviteActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +39,11 @@ public class InviteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_invite);
 
-
         urlField = findViewById(R.id.edit_videourl);
         startTimeField = findViewById(R.id.timepicker_breaktime);
         inviteButton = findViewById(R.id.button_sendinvite);
+        settingsButton = findViewById(R.id.button_settings);
+
         startTimeField.setIs24HourView(true);
 
 
@@ -54,6 +66,16 @@ public class InviteActivity extends AppCompatActivity {
                 i.putExtra(Config.break_time_identifier, startTime.getTime());
 
                 // TODO send the invite link to the other participants via notification
+                startActivity(i);
+            }
+        });
+
+
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(InviteActivity.this, SettingsActivity.class);
+
                 startActivity(i);
             }
         });

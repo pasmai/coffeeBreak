@@ -2,7 +2,9 @@ package ch.hackzurich.coffeebreak;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -44,9 +46,12 @@ public class SettingsActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                // Deletion succeeded
+                                Toast.makeText(getActivity(), "You have been exterminated!",
+                                        Toast.LENGTH_LONG).show();
+                                //startActivity(new Intent(MainActivity.this, InviteActivity.class));
                             } else {
-                                // Deletion failed
+                                Toast.makeText(getActivity(), "Extermination failed!",
+                                        Toast.LENGTH_LONG).show();
                             }
                         }
                     });
