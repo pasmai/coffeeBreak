@@ -17,6 +17,8 @@ import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -66,6 +68,12 @@ public class InviteActivity extends AppCompatActivity {
 
                 // send message to server which will then send notifications to all users
                 MyFirebaseMessagingService.sendNotificationToServer(url, startTime);
+
+                // Write a message to the database
+                DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+                database.child("invites").child("url").child("url").setValue(url);
+                database.child("invites").child("url").child("timestamp").setValue(startTime.getTime());
+                database.child("invites").child("url").child("target_topic").setValue("all");
 
                 startActivity(i);
             }
