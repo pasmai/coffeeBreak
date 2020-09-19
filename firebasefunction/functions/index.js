@@ -4,18 +4,18 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 
-exports.pushNotification = functions.database.ref('/invites/{urlString}/{timestamp}').onWrite(event => {
+exports.pushNotification = functions.database.ref('/invites/{urlString}/{timestampString}').onWrite((change, context) => {
     console.log('Push notification event triggered');
-    console.log(event.params.urlString);
-    console.log(event.params.timestamp);
+    console.log(context.params.urlString);
+    console.log(context.params.timestampString);
     // Create a notification
     const payload = {
         notification: {
             title: "valueObject.title",
             body: "valueObject.message",
             sound: "default",
-            timestamp: 1600547519,
-            url: "event.params.urlString",
+            timestamp: context.params.timestampString,
+            url: context.params.urlString,
         }
     };
 
