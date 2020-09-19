@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                             new AuthUI.IdpConfig.EmailBuilder().build())).build(),
                     RC_SIGN_IN);
         }else{
-            startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+            startActivity(new Intent(MainActivity.this, VideoChatActivity.class));
         }
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
             // Successfully signed in
             if (resultCode == RESULT_OK) {
-                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                startActivity(new Intent(MainActivity.this, VideoChatActivity.class));
                 finish();
             } else {
             }
