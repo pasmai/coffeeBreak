@@ -17,7 +17,7 @@ public class InvitationReceivedActivity extends AppCompatActivity {
 
     String TAG = "InvitationReceived";
     String url;
-    Date breakTime;
+    Date breakTime = new Date();
     boolean accepted = false;
     boolean isTimerExpired = false;
 
