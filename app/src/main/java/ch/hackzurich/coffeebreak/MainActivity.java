@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             startActivityForResult(
                     // Get an instance of AuthUI based on the default app
                     AuthUI.getInstance().createSignInIntentBuilder().setAvailableProviders(Arrays.asList(
-                            new AuthUI.IdpConfig.GoogleBuilder().build(),
+                            //new AuthUI.IdpConfig.GoogleBuilder().build(),
                             //new AuthUI.IdpConfig.FacebookBuilder().build(),
                             //new AuthUI.IdpConfig.TwitterBuilder().build(),
                             //new AuthUI.IdpConfig.MicrosoftBuilder().build(),
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                             new AuthUI.IdpConfig.EmailBuilder().build())).build(),
                     RC_SIGN_IN);
         }else{
-            startActivity(new Intent(MainActivity.this, InviteActivity.class));
+            startActivity(new Intent(MainActivity.this, SettingsActivity.class));
         }
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
             // Successfully signed in
             if (resultCode == RESULT_OK) {
-                startActivity(new Intent(MainActivity.this, InviteActivity.class));
+                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
                 finish();
             } else {
             }
