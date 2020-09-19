@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "965732816077",
+    "firebase_url": "https://coffeebreak-59d36.firebaseio.com",
+    "project_id": "coffeebreak-59d36",
+    "storage_bucket": "coffeebreak-59d36.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:965732816077:android:3f44c8695b224ecdfd0584",
+        "android_client_info": {
+          "package_name": "ch.hackzurich.coffeebreak"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "965732816077-gagn2aub4irtqkuuea87d7r689muthqc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-33aRHxorycggPOKn4w9YbNrV0VuTNGU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "965732816077-gagn2aub4irtqkuuea87d7r689muthqc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
