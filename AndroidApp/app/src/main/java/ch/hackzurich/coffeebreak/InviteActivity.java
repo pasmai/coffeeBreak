@@ -1,31 +1,21 @@
 package ch.hackzurich.coffeebreak;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import ch.hackzurich.coffeebreak.services.MyFirebaseMessagingService;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-import android.util.Log;
-
-import com.google.firebase.auth.FirebaseAuth;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.firebase.messaging.RemoteMessage;
 
 import java.util.Date;
 import java.util.Random;
-
-import static com.google.firebase.messaging.Constants.MessagePayloadKeys.SENDER_ID;
 
 public class InviteActivity extends AppCompatActivity {
     TextView urlField;
@@ -74,7 +64,7 @@ public class InviteActivity extends AppCompatActivity {
 
                 String url = buffer.toString();
 
-                i.putExtra(Config.video_url_identifier, url);
+                i.putExtra(Config.video_meeting_id, url);
                 i.putExtra(Config.break_time_identifier, startTime.getTime());
 
                 // send message to server which will then send notifications to all users

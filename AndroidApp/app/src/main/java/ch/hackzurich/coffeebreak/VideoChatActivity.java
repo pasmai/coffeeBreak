@@ -22,7 +22,7 @@ import java.net.URL;
             setContentView(R.layout.activity_video_chat);
 
             // Initialize default options for Jitsi Meet conferences.
-            String meetingId = getIntent().getStringExtra(Config.video_url_identifier);
+            String meetingId = getIntent().getStringExtra(Config.video_meeting_id);
             URL serverURL;
             try {
                 serverURL = new URL("https://meet.jit.si/" + meetingId);

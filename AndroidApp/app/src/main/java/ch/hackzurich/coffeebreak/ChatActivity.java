@@ -3,15 +3,12 @@ package ch.hackzurich.coffeebreak;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.net.URL;
 import java.util.Date;
 
 public class ChatActivity extends AppCompatActivity {
@@ -23,19 +20,15 @@ public class ChatActivity extends AppCompatActivity {
 
         // set video URL on button
         Button buttonOpenVideo = findViewById(R.id.button_openvideo);
-        String url = getIntent().getStringExtra(Config.video_url_identifier);
-        if (!url.startsWith("http")){
-            url = "http://" + url;
-        }
-        final Uri uri = Uri.parse(url);
+        String meetingId = getIntent().getStringExtra(Config.video_meeting_id);
 
 
         buttonOpenVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // open video call URL in external App/Browser
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(uri);
+                Intent i = new Intent(ChatActivity.this, VideoChatActivity.class);
+                i.putExtra(Config.video_meeting_id, meetingId);
                 startActivity(i);
             }
         });

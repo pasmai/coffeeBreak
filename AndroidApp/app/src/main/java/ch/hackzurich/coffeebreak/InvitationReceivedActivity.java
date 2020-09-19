@@ -3,7 +3,6 @@ package ch.hackzurich.coffeebreak;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -34,7 +33,7 @@ public class InvitationReceivedActivity extends AppCompatActivity {
         }
 
         breakTime.setTime(dateLong);
-        url = getIntent().getStringExtra(Config.video_url_identifier);
+        url = getIntent().getStringExtra(Config.video_meeting_id);
 
 
         Button button = findViewById(R.id.button_accept_invite);
@@ -73,7 +72,7 @@ public class InvitationReceivedActivity extends AppCompatActivity {
 
         // open video call URL in external App/Browser
         Intent i = new Intent(this, VideoChatActivity.class);
-        i.putExtra(Config.video_url_identifier, url);
+        i.putExtra(Config.video_meeting_id, url);
         startActivity(i);
     }
 }

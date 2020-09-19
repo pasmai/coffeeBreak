@@ -5,8 +5,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
 
@@ -86,7 +84,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         // send Notification that takes user to the AcceptActivity
         Intent intent = new Intent(this, InvitationReceivedActivity.class);
-        intent.putExtra(Config.video_url_identifier, url);
+        intent.putExtra(Config.video_meeting_id, url);
         intent.putExtra(Config.break_time_identifier, timestamp);
 
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
