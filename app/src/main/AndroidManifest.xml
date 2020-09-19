@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="ch.hackzurich.coffeebreak">
 
     <application
@@ -18,10 +19,55 @@
         <activity android:name=".InvitationReceivedActivity" />
         <activity android:name=".ChatActivity" />
         <activity android:name=".InviteActivity" />
+        <activity android:name=".firebase.auth.ChooserActivity" />
         <activity
-            android:name=".ui.login.LoginActivity"
-            android:label="@string/title_activity_login">
+            android:name=".firebase.auth.CustomAuthActivity"
+            android:label="@string/label_custom_auth" />
+        <activity
+            android:name=".firebase.auth.GoogleSignInActivity"
+            android:label="@string/label_google_sign_in" />
+        <activity
+            android:name=".firebase.auth.EmailPasswordActivity"
+            android:label="@string/label_emailpassword"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".firebase.auth.PasswordlessActivity"
+            android:label="@string/label_passwordless"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <data
+                    android:host="your-project-id.firebaseapp.com"
+                    android:scheme="https" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
+        <activity
+            android:name=".firebase.auth.PhoneAuthActivity"
+            android:label="@string/label_phone_auth"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".firebase.auth.AnonymousAuthActivity"
+            android:label="@string/label_anonymous_auth" />
+        <activity
+            android:name=".firebase.auth.FirebaseUIActivity"
+            android:label="@string/label_firebase_ui" />
+        <activity
+            android:name=".firebase.auth.GenericIdpActivity"
+            android:label="@string/label_generic_idp" />
+        <activity
+            android:name=".firebase.auth.MultiFactorActivity"
+            android:label="@string/label_multi_factor" />
+        <activity
+            android:name=".firebase.auth.MultiFactorEnrollActivity"
+            android:label="MultiFactor Sign-In" />
+        <activity
+            android:name=".firebase.auth.MultiFactorSignInActivity"
+            android:label="MultiFactor Sign-In" />
+        <activity
+            android:name=".firebase.auth.MultiFactorUnenrollActivity"
+            android:label="MultiFactor Unenroll" />
     </application>
 
 </manifest>
