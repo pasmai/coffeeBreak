@@ -5,13 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import ch.hackzurich.coffeebreak.firebase.auth.ChooserActivity;
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
+    private static final int RC_SIGN_IN = 123;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +28,22 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser==null){
-            Intent i = new Intent(MainActivity.this, ChooserActivity.class);
-            startActivity(i);
+            //Intent i = new Intent(MainActivity.this, ChooserActivity.class);
+            //startActivity(i);
+            // Choose an arbitrary request code value
+
+            startActivityForResult(
+                    // Get an instance of AuthUI based on the default app
+                    AuthUI.getInstance().createSignInIntentBuilder().setAvailableProviders(Arrays.asList(
+                            new AuthUI.IdpConfig.GoogleBuilder().build(),
+                            //new AuthUI.IdpConfig.FacebookBuilder().build(),
+                            new AuthUI.IdpConfig.TwitterBuilder().build(),
+                            new AuthUI.IdpConfig.MicrosoftBuilder().build(),
+                            new AuthUI.IdpConfig.YahooBuilder().build(),
+                            new AuthUI.IdpConfig.AppleBuilder().build(),
+                            new AuthUI.IdpConfig.EmailBuilder().build(),
+                            new AuthUI.IdpConfig.PhoneBuilder().build())).build(),
+                    RC_SIGN_IN);
         }
         //updateUI(currentUser);
     }
