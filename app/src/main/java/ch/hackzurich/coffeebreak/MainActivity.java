@@ -1,5 +1,6 @@
 package ch.hackzurich.coffeebreak;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,6 +8,8 @@ import android.os.Bundle;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -38,17 +41,16 @@ public class MainActivity extends AppCompatActivity {
                     AuthUI.getInstance().createSignInIntentBuilder().setAvailableProviders(Arrays.asList(
                             new AuthUI.IdpConfig.GoogleBuilder().build(),
                             //new AuthUI.IdpConfig.FacebookBuilder().build(),
-                            new AuthUI.IdpConfig.TwitterBuilder().build(),
-                            new AuthUI.IdpConfig.MicrosoftBuilder().build(),
-                            new AuthUI.IdpConfig.YahooBuilder().build(),
-                            new AuthUI.IdpConfig.AppleBuilder().build(),
-                            new AuthUI.IdpConfig.EmailBuilder().build(),
-                            new AuthUI.IdpConfig.PhoneBuilder().build())).build(),
+                            //new AuthUI.IdpConfig.TwitterBuilder().build(),
+                            //new AuthUI.IdpConfig.MicrosoftBuilder().build(),
+                            // AuthUI.IdpConfig.YahooBuilder().build(),
+                            //new AuthUI.IdpConfig.AppleBuilder().build(),
+                            //new AuthUI.IdpConfig.PhoneBuilder().build()),
+                            new AuthUI.IdpConfig.EmailBuilder().build())).build(),
                     RC_SIGN_IN);
         }else{
             startActivity(new Intent(MainActivity.this, InviteActivity.class));
         }
-        //updateUI(currentUser);
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

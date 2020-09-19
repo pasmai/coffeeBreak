@@ -48,6 +48,7 @@ dependencies {
     // Firebase UI
     // Used in FirebaseUIActivity.
     implementation 'com.firebaseui:firebase-ui-auth:6.3.0'
+    implementation 'androidx.preference:preference:1.1.0'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

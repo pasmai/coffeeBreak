@@ -119,5 +119,10 @@
 
     <string name="error_sign_in_failed">Sign in failed, see logs for details.</string>
     <string name="multi_factor_signed_out">You are not signed in. To use this sample, first navigate to the Email/Password example to sign in and then return here to enroll in multi-factor auth.</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">User Account</string>
+    <string name="myCoolButton">DeleteUserButton</string>
 
 </resources>
