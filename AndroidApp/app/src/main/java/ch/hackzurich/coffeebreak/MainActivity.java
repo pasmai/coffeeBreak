@@ -39,15 +39,8 @@ public class MainActivity extends AppCompatActivity {
 
             startActivityForResult(
                     // Get an instance of AuthUI based on the default app
-                    AuthUI.getInstance().createSignInIntentBuilder().setAvailableProviders(Arrays.asList(
-                            //new AuthUI.IdpConfig.GoogleBuilder().build(),
-                            //new AuthUI.IdpConfig.FacebookBuilder().build(),
-                            //new AuthUI.IdpConfig.TwitterBuilder().build(),
-                            //new AuthUI.IdpConfig.MicrosoftBuilder().build(),
-                            // AuthUI.IdpConfig.YahooBuilder().build(),
-                            //new AuthUI.IdpConfig.AppleBuilder().build(),
-                            //new AuthUI.IdpConfig.PhoneBuilder().build()),
-                            new AuthUI.IdpConfig.EmailBuilder().build())).build(),
+                    AuthUI.getInstance().createSignInIntentBuilder().setIsSmartLockEnabled(!BuildConfig.DEBUG /* credentials */, true /* hints */)
+                            .build(),
                     RC_SIGN_IN);
 
             FirebaseMessaging.getInstance().subscribeToTopic("all");
@@ -68,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, InviteActivity.class));
                 finish();
             } else {
+                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
             }
         }
     }
