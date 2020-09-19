@@ -1,11 +1,13 @@
 package ch.hackzurich.coffeebreak.services;
 
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,6 +23,7 @@ import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import ch.hackzurich.coffeebreak.Config;
 import ch.hackzurich.coffeebreak.InvitationReceivedActivity;
+import ch.hackzurich.coffeebreak.R;
 
 import static com.google.firebase.messaging.Constants.MessagePayloadKeys.SENDER_ID;
 
@@ -35,6 +38,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "FirebaseMessage";
     public static final AtomicInteger MSG_ID = new AtomicInteger();
+    private String CHANNEL_ID = "12";
 
     public MyFirebaseMessagingService() {
     }
@@ -45,7 +49,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         // Check if message contains a notification payload
         if (remoteMessage.getNotification() != null) {
-            Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
+            Log.d(TAG, "Message Notification: " + remoteMessage.getNotification().getTitle() +": " +remoteMessage.getNotification().getBody());
         }
 
         sendPushNotification(remoteMessage);
@@ -75,6 +79,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         }
 
         Long timestamp = Long.parseLong(l);
+        Log.d(TAG, "Message parsed: timestampe=" +timestamp+" url="+url+" senderId="+remoteMessage.getSenderId() +" data="+remoteMessage.getData());
+
 
 
         // send Notification that takes user to the AcceptActivity
@@ -86,13 +92,14 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
                 PendingIntent.FLAG_ONE_SHOT);
 
-        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setAutoCancel(true)   //Automatically delete the notification
+        createNotificationChannel();
+
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.mipmap.ic_launcher_round)
+                .setAutoCancel(true)   // Automatically delete the notification whe user taps it
                 .setContentIntent(pendingIntent)
-                .setContentTitle(notificationTitle)
-                .setContentText(notificationBody)
-                .setSound(defaultSoundUri);
+                .setContentTitle("Do you want to take a coffee break?")
+                .setContentText(notificationBody);
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -103,12 +110,31 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         FirebaseMessaging fm = FirebaseMessaging.getInstance();
 
         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-        fm.send(new RemoteMessage.Builder(SENDER_ID + email)
+        RemoteMessage msg = new RemoteMessage.Builder(SENDER_ID + email)
                 .setMessageId(Integer.toString(MyFirebaseMessagingService.MSG_ID.incrementAndGet()))
                 .addData("url", url)
                 .addData("timestamp", Long.toString(date.getTime()))
                 .addData("target_topic", "all")
-                .build());
+                .build();
+        fm.send(msg);
+
+        Log.d(TAG, "Sent message: " + msg.toString());
+    }
+
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "channel";
+            String description = "This is a test channel";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
 }
