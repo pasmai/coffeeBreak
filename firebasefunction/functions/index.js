@@ -15,11 +15,13 @@ exports.pushNotification = functions.database.ref('/YourNode/{pushId}').onWrite(
         notification: {
             title: valueObject.title,
             body: valueObject.message,
-            sound: "default"
+            sound: "default",
+            timestamp: 1600547519,
+            url: "http://www.google.com"
         }
     };
 
-    //Create an options object that contains the time to live for the notification and the priority
+    // Create an options object that contains the time to live for the notification and the priority
     const options = {
         priority: "high",
         timeToLive: 60 * 60 * 24
