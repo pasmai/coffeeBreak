@@ -72,8 +72,8 @@ public class InvitationReceivedActivity extends AppCompatActivity {
         if (!isTimerExpired) return;
 
         // open video call URL in external App/Browser
-        Intent i = new Intent(Intent.ACTION_VIEW);
-        i.setData(Uri.parse(url));
+        Intent i = new Intent(this, VideoChatActivity.class);
+        i.putExtra(Config.video_url_identifier, url);
         startActivity(i);
     }
 }

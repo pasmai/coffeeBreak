@@ -21,9 +21,10 @@ import java.net.URL;
             setContentView(R.layout.activity_video_chat);
 
             // Initialize default options for Jitsi Meet conferences.
+            String serverString = getIntent().getStringExtra(Config.video_url_identifier);
             URL serverURL;
             try {
-                serverURL = new URL("https://meet.jit.si");
+                serverURL = new URL(serverString);
             } catch (MalformedURLException e) {
                 e.printStackTrace();
                 throw new RuntimeException("Invalid server URL!");
