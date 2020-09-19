@@ -12,6 +12,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.Arrays;
 
@@ -48,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
                             //new AuthUI.IdpConfig.PhoneBuilder().build()),
                             new AuthUI.IdpConfig.EmailBuilder().build())).build(),
                     RC_SIGN_IN);
+
+            FirebaseMessaging.getInstance().subscribeToTopic("all");
+
+
         }else{
             startActivity(new Intent(MainActivity.this, InviteActivity.class));
         }
