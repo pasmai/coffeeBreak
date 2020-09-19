@@ -14,8 +14,10 @@ exports.pushNotification = functions.database.ref('/invites/{urlString}/{timesta
             title: "valueObject.title",
             body: "valueObject.message",
             sound: "default",
-            timestamp: context.params.timestampString,
-            url: context.params.urlString,
+                "data":{
+                    timestamp: context.params.timestampString,
+                    url: context.params.urlString
+                }
         }
     };
 
