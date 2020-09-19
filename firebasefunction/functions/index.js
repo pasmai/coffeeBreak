@@ -10,14 +10,14 @@ exports.pushNotification = functions.database.ref('/invites/{urlString}/{timesta
     console.log(context.params.timestampString);
     // Create a notification
     const payload = {
+       "data": {
+            timestamp: context.params.timestampString,
+            url: context.params.urlString
+        },
         notification: {
             title: "valueObject.title",
             body: "valueObject.message",
-            sound: "default",
-                "data":{
-                    timestamp: context.params.timestampString,
-                    url: context.params.urlString
-                }
+            sound: "default"
         }
     };
 
