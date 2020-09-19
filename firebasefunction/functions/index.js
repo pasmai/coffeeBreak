@@ -27,5 +27,5 @@ exports.pushNotification = functions.database.ref('/YourNode/{pushId}').onWrite(
         timeToLive: 60 * 60 * 24
     };
 
-    return admin.messaging().sendToTopic("pushNotifications", payload, options);
+    return admin.messaging().sendToTopic("all", payload, options);
 });
